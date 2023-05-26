@@ -1,0 +1,25 @@
+{% extends 'basic.html' %} {% block title %}View Room {% endblock title %} {% block body %}
+<h3 class="text-success"> Details</h3>
+<hr>
+<div class="container mx-0 ">
+    <p><b>House Name :-</b> {{i.h_id.house_name}}</p>
+    <p><b>District Name  :-</b> {{i.h_id.p_id.districtname}}</p>
+   
+    <p><b>Status :-</b> {{i.status}} </p>
+    <p><b>Check in :-</b> {{i.check_in}} </p>
+    <p><b>Check Out :-</b> {{i.check_out}} </p>
+    <p><b>Rent :-</b> {{i.h_id.rental}} </p>
+    <p>Vaccination Certificate</p>
+    <a href="{{ i.doc1.url }}" download="{{ booking_obj.doc1.name }}">Download doc1</a>
+    <p>Covid Test Certificate</p>
+    <a href="{{ i.doc2.url }}" download="{{ booking_obj.doc1.name }}">Download doc1</a>
+    <a  href="/approve/{{i.id}}" class="btn btn-danger">Approve</a>
+    <a  href="/reject/{{i.id}}" class="btn btn-danger">Reject</a>
+
+</div>
+
+
+
+
+
+ {% endblock body %}

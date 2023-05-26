@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}
+    {% endblock title %}
+    </title>
+
+    <!--Cdn links for bootstrap-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'bootstrap\bootstrap.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  
+    {% block css %}
+    {% endblock css %}
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body height: 100%;">
+    <!--Header Section starts here-->
+    <div class="container-fluid px-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary font-weight-bold">
+            <a class="navbar-brand text-bold bg-black " ><b>Quarantine System</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto ">
+                    {% if request.session.oid %}
+                    <li class="nav-item active">
+                        <a class="nav-link text-bold " href="/ownerhome"> Home</a>
+                    </li>
+                    {% elif request.session.user_name %}
+                    <li class="nav-item active">
+                        <a class="nav-link text-bold " href="/"> Home</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link text-bold " href="/"> Home</a>
+                    </li>
+                    {% endif %}
+
+                   
+               
+                  
+                    {% if request.session.user_name %}
+                    <li class="nav-item active">
+                            <a class="nav-link text-bold" href="/mybook">My Bookings </a>
+                        </li>
+                    
+                    {% elif request.session.oid %}
+
+                    <li class="nav-item active">
+                            <a class="nav-link text-bold" href="/viewrequest">View Requests</a>
+                        </li>
+
+                    {% endif %}
+                    
+                    
+                    
+                    
+                        
+                
+                    
+                    
+                   
+                </ul>
+{% if request.session.oid %}
+
+
+    <a href="/ownerlogout" class="nav-link">
+ <button class="btn btn-group bg-warning" data-toggle="modal" data-target="#forlogin">
+     Logout
+ </button>
+</a>&nbsp; &nbsp;
+ </button>
+ 
+
+
+                {% elif request.session.user_name %}
+                    <button class="btn btn-group bg-light" data-toggle="modal" data-target="#forlogin">
+                    Hello, {{request.session.user_name }}
+                    <a href="/logout" class="nav-link">
+                    <button class="btn btn-group bg-warning" data-toggle="modal" data-target="#forlogin">
+                        Logout
+                    </button>
+                    </a>&nbsp; &nbsp;
+                    </button>
+                
+                {% else %}
+                   
+                    <a href="/login" class="nav-link">
+                    <button class="btn btn-group bg-warning font-weight-bold" data-toggle="modal" data-target="#forlogin">
+                        User Login
+                    </button></a>
+                <a href="/ownerlogin" class="nav-link">
+                    <button class="btn btn-group bg-warning font-weight-bold">
+                        Owner Login
+                    </button></a>
+                {% endif %}
+
+               
+            </div>
+        </nav>
+    </div>
+    <!--Header Section Ends here-->
+    
+    
+    
+        {% for message in messages %}
+             <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+             </button>
+            </div>
+        {% endfor %}
+    
+    {% block body %}
+    
+    {% endblock body %}
+        
+   
+    
+
+
+
+
+
+    
+</body>
+{% block js %}
+{% endblock js %}
+</html>

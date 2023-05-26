@@ -1,0 +1,119 @@
+    {% extends 'basic.html' %}
+    {% block title %}Quarantine System
+    {% endblock title %}
+    {% block body %}
+     <!--Booking Section starts here-->
+     
+    <section>
+        <div class="container-fluid py-5 px-5 ">
+            <form action="{% url 'search' %}" method="POST">
+            {% csrf_token %}
+            <div class="row justify-content-center py-5 bg-light">
+                <div class="col-lg-4">
+                    <label for="">Location</label>
+                    <select class="form-control" name="search" id="roomstatus">
+                        <!--Hotel id and location-->
+                        <option>Location</option>
+                       {% for i in all_location %}
+                            
+                            <option value={{i.id}}>{{i.districtname}}</option>
+                        {% endfor %}    
+                        
+                        
+                            
+                    </select>
+                </div>
+               
+              
+                <div class="col-lg-2">
+                    <label for="">No of persons</label>
+                    <input class="form-control mr-sm-2" type="number" placeholder="Number" name="capacity" aria-label="Search" required="True">
+                </div>
+                <div class="col-lg-2">
+
+                    <input type="submit" value="Check Availabilty" class="form-control mr-sm-2 btn btn-primary my-4" style="position: relative;top: 7px;">
+                </div>
+                
+                
+            </div>
+            </form>
+
+        </div>
+    </section>
+    {% for i in messages %}
+    <div class="alert alert-success" role="alert">
+        {{i}}
+      </div>
+    {% endfor %}
+    <!--Booking Section ends here-->
+    <!--Fetched reults appear here-->
+    <div class="container-fluid px-0 mx-aut">
+        {% if rooms %}
+           <table class="table">
+               <thead class="o">
+                <th>Type</th>
+                <th>Location</th>
+                <th>Person</th>
+                <th>price</th>
+                <th>Action</th>
+            </thead>
+            {% for r in rooms %}
+                <tr class="">
+                <td>{{ r.get_room_type_display }}</td>
+                <td>{{ r.hotel.location }}</td>
+                <td>{{ r.capacity }}</td>
+                <td>{{ r.price }}</td>
+                <td><a href="/user/book-room?roomid={{r.id}}"><button class="btn btn-warning">Book Now</button></a></td>
+                </tr>
+            {% endfor %}
+            
+           </table> 
+        {% endif %}
+    </div>
+    <!--Fetched results ends here-->
+
+
+    <h3 class="text-center text-dark">All Houses available</h3>
+
+    <!--Room tables starts here-->
+    <div class="container-fluid px-0" style="border:1px solid red">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Information</th>
+                    <th class="text-center">View</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in all_building %}
+                <tr>
+                    <td class="text-center">
+                        <!--Room details-->
+                        <h1>Details</h1>
+                        <p>Price: {{r.rental}}</p>
+                        <p>House Name :{{r.house_name }}</p>
+                        <p>Capacity :Max person {{r.capacity}} </p>
+                        <p>location :{{r.p_id}} </p>
+                        
+                    </td>
+                    <td class="text-center">
+                        <!--Room Images-->
+                        <img src="{{r.picture.url}}" alt="" class="img-fluid pt-4" height="500px" width="200px">
+                        <p></p>
+                        <p><a href="/book/{{r.id}}"><button class="btn btn-warning">Book Now</button></a></p>
+                    </td>
+
+                </tr>
+                {% endfor %}
+             
+
+            </tbody>
+        </table>
+    </div>
+    <!--Roo tables ends here-->
+
+    
+    {% endblock body %}
+   
+   

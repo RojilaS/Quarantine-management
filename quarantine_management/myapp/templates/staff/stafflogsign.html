@@ -1,0 +1,197 @@
+{% extends 'basic.html' %}
+{% block title %}staff
+{% endblock title %}
+{% block body %}
+<!--Cards starts here-->
+    <div class="container py-5">
+        <!--login and signup tab starts here -->
+        <section>
+            <div class="card w-50 mx-auto">
+                <div class="card-title bg-light ">
+                    <div class="container mt-3 mx-auto">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs justify-content-center w-100 " style="width:358px">
+
+                            <li class="nav-item">
+                                <a class="nav-link active " data-toggle="tab" href="#home"  style="width:158px">Login</a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu1" style="width:158px">Signup</a>
+                            </li>
+
+                    </div>
+                </div>
+
+
+                </ul>
+                <div class="card-body">
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div id="home" class="container tab-pane active">
+                            <p class="text-center text-dark">Staff login form</p>
+                            {% for i in messages %}
+                            <p style="color:red;">{{i}}</p>
+                            {% endfor %}
+                            {% if msg1 %}
+                        <p style="color:red;">{{msg1}}</p>
+                        {% endif %}
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xlg-12">
+
+                                        <form action="/ownerlogin" method="post">
+                                            {%csrf_token%}
+                                            <div class="form-group">
+                                                <label for="email">username:</label>
+                                                <input type="email" class="form-control " id="email" placeholder="Enter email" id="emailInput"  name="email" required="required">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="pwd">Password:</label>
+                                                <input type="password"  required 
+                                                title="Password must be 8-20 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character" class="form-control " id="password" placeholder="password" name="password">
+                                            </div>
+                                            <div class="form-group form-check">
+                                                <!-- <label class="form-check-label">
+                                                        <input class="form-check-input " type="checkbox"
+                                                            name="remember">
+                                                        Remember me
+                                                    </label> -->
+                                            </div>
+                                    
+                                            <button type="submit" class="btn btn-primary">Login</button>
+                                            <a href="/ownersignup" class="btn btn-primary">Signup</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="menu1" class="container tab-pane fade">
+                            <p class="text-center text-dark">Staff Signup form</p>
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-xlg-12">
+
+                                        <form action="{% url 'ownersignup' %}" method="POST" enctype="multipart/form-data">
+                                            {%csrf_token%}
+                                            <div class="form-group">
+                                                
+                                            <label for="fname">fname:</label>
+                                            <input type="text" class="form-control " id="fname" onkeypress="return allowOnlyLetters(event,this);" autocomplete="off"  maxlength="20"  placeholder="Firstname" name="fname" required ="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lname">lname:</label>
+                                            <input type="text" class="form-control " id="lname" onkeypress="return allowOnlyLetters(event,this);" autocomplete="off"  maxlength="20" placeholder="Lastname" name="lname" required ="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="gender">gender:</label>
+                                            <input type="gender" class="form-control " id="gender"  onkeypress="return allowOnlyLetters(event,this);" autocomplete="off"  maxlength="20" placeholder="Enter gender" name="gender" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">email:</label>
+                                            <!-- <input type="email" class="form-control " id="email" placeholder="Enter email" name="email"   id="emailInput" onblur="validateEmail()" required="required"> -->
+                                            <input type="email" class="form-control " name="email" id="emailInput" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contact">contact:</label>
+                                            <input type="tel" class="form-control "  placeholder="Enter contact" name="contact" pattern="[0-9]{}" minlength="10" maxlength="10" id="numberInput" onblur="validateNumber()" onkeypress="return isNumberKey(event,this)"  required="required" >
+                                        </div>
+                                        
+                                            <div class="form-group">
+                                                <label for="password1">Password:</label>
+                                                <input type="password" class="form-control " name="password" required >
+                                                
+                                          
+                                            <div class="form-group">
+                                                <label for="document">Documents:</label>
+                                                <input type="file" class="form-control " id="cout"    name="vill" required>
+                                            </div>
+                                        
+                                            
+
+
+                                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+        </section>
+        <!--Login and logout tab ends here-->
+    </div>
+    <script>
+        function validateEmail() {
+          var emailInput = document.getElementById("emailInput");
+          var email = emailInput.value;
+          var emailRegex = /^[A-Za-z0-9._%+-]+@gmail\.com$/;
+    
+          if (!emailRegex.test(email)) {
+            alert("Please enter a valid Gmail address.");
+            emailInput.value = "";
+            return false;
+          }
+        }
+      </script>
+    <script>
+    function allowOnlyLetters(e, t)
+    {
+       if (window.event)
+       {
+          var charCode = window.event.keyCode;
+       }
+       else if (e)
+       {
+          var charCode = e.which;
+       }
+       else { return true; }
+       if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+           return true;
+       else
+       {
+          alert("Please enter only alphabets");
+          return false;
+       }
+    }
+    </script>
+    <script>
+        function validateNumber() {
+      var numberInput = document.getElementById("numberInput");
+      var value = numberInput.value;
+
+      if (value === "0000000000" || value === "1111111111" || value === "2222222222" || value === "3333333333" || value === "4444444444" || value === "5555555555" || value === "6666666666" || value === "7777777777" || value ==="8888888888" || value ==="9999999999")
+      {
+        alert("Please enter a valid phone number");
+        numberInput.value = "";
+        return false;
+      }
+    }
+    </script>
+    
+    <script language="Javascript" type="text/javascript">
+    
+        function isNumberKey(evt, obj) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            var value = obj.value;
+            var dotcontains = value.indexOf(".") != -1;
+            if (dotcontains)
+                if (charCode == 46) return false;
+            if (charCode == 46) return true;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+</script>
+{% endblock body %}

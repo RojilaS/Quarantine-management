@@ -1,0 +1,135 @@
+{% extends 'basic.html' %} {% block title %}Book Room {% endblock title %} 
+{% block body %}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 col-lg-6 col-xlg-6 col-sm-12 mx-auto my-4 ">
+            {% for i in messages %}
+            <div class="alert alert-danger" role="alert">
+              {{i}}
+              </div
+            {% endfor %}
+
+            <form action="" method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+               
+                <div class="form-group">
+                    <label for="username">House Name:</label>
+                    <input type="text" class="form-control " id="hotel" name="house" disabled value={{build.house_name}}>
+                </div>
+                <div class="form-group">
+                    <label for="username">Owner Name:</label>
+                    <input type="text" class="form-control " id="hotel" name="owner" disabled value={{build.owner_id.username}}>
+                </div>
+                <div class="form-group">
+                    <label for="username">Capacity:</label>
+                    <input type="text" class="form-control " id=capacity" name="capacity" disabled value={{build.capacity}}>
+                </div>
+                <div class="form-group">
+                    <label for="username">Location:</label>
+                    <input type="text" class="form-control " id="location" name="location" disabled value={{build.p_id.districtname}}>
+                </div>
+              
+                <div class="form-group">
+                    <label for="person">No. of Persons:</label>
+                    <input type="number" class="form-control" id="person" name="person" min="1" max="{{ room.capacity }}" required>
+                    <span id="person-error" class="text-danger"></span>
+                  </div>
+                  
+                <!-- 
+                    remove
+                 -->
+
+      
+
+                 <!-- end of remove -->
+                 <div class="form-group">
+                    <label for="password2">Check-in:</label>
+                    <input type="date" class="form-control" id="check-in-date" placeholder="check in" name="check_in" required>
+                    <span id="check-in-error" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="password2">Check-Out:</label>
+                    <input type="date" class="form-control" id="checkout" placeholder="check out" name="check_out" required>
+                    <span id="check-out-error" class="text-danger"></span>
+                  </div>
+                  
+                <div class="form-group">
+                    <label for="password2">Covide test result:</label>
+                    <input type="file" class="form-control " id="cout"    name="aadhar" required>
+                </div>
+                <div class="form-group">
+                    <label for="password2">Covid vaccine Certificate:</label>
+                    <input type="file" class="form-control " id="cout"   placeholder="check out " name="covid" required>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="password2">Price:</label>
+                    <input type="number" class="form-control " id="price" placeholder="price " name="price" disabled value={{build.rental}} required>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Book Now</button>
+                
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+    const personInput = document.getElementById('person');
+    
+    const capacity = {{build.capacity}}
+    const personError = document.getElementById('person-error');
+  
+    personInput.addEventListener('input', function () {
+      const personCount = parseInt(personInput.value);
+      if (personCount > capacity) {
+        personError.textContent = 'Number of persons cannot exceed the capacity.';
+      } else {
+        personError.textContent = '';
+      }
+    });
+    const checkInDateInput = document.getElementById('check-in-date');
+    const checkOutDateInput = document.getElementById('checkout');
+    const checkInError = document.getElementById('check-in-error');
+    const checkOutError = document.getElementById('check-out-error');
+  
+    checkInDateInput.addEventListener('input', function () {
+      const checkInDate = new Date(checkInDateInput.value);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+  
+      if (checkInDate < today) {
+        checkInError.textContent = 'Check-in date cannot be before today.';
+        checkInDateInput.value = ''; // Clear check-in date input
+      } else {
+        checkInError.textContent = '';
+      }
+  
+      if (checkOutDateInput.value !== '') {
+        const checkOutDate = new Date(checkOutDateInput.value);
+        if (checkOutDate < checkInDate) {
+          checkOutError.textContent = 'Check-out date cannot be before the check-in date.';
+          checkOutDateInput.value = ''; // Clear check-out date input
+        } else {
+          checkOutError.textContent = '';
+        }
+      }
+    });
+  
+    checkOutDateInput.addEventListener('input', function () {
+      const checkInDate = new Date(checkInDateInput.value);
+      const checkOutDate = new Date(checkOutDateInput.value);
+  
+      if (checkOutDate < checkInDate) {
+        checkOutError.textContent = 'Check-out date cannot be before the check-in date.';
+        checkOutDateInput.value = ''; // Clear check-out date input
+      } else {
+        checkOutError.textContent = '';
+      }
+    });
+  </script>
+{% endblock %}

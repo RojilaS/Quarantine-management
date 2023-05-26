@@ -1,0 +1,167 @@
+{% extends 'basic.html' %} {% block title %} staff panel {% endblock title %} {% block css %}
+<style>
+    .progress {
+        width: 150px;
+        height: 150px;
+        background: none;
+        position: relative;
+    }
+    
+    .progress::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 6px solid #eee;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    .progress>span {
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        z-index: 1;
+    }
+    
+    .progress .progress-left {
+        left: 0;
+    }
+    
+    .progress .progress-bar {
+        width: 100%;
+        height: 100%;
+        background: none;
+        border-width: 6px;
+        border-style: solid;
+        position: absolute;
+        top: 0;
+    }
+    
+    .progress .progress-left .progress-bar {
+        left: 100%;
+        border-top-right-radius: 80px;
+        border-bottom-right-radius: 80px;
+        border-left: 0;
+        -webkit-transform-origin: center left;
+        transform-origin: center left;
+    }
+    
+    .progress .progress-right {
+        right: 0;
+    }
+    
+    .progress .progress-right .progress-bar {
+        left: -100%;
+        border-top-left-radius: 80px;
+        border-bottom-left-radius: 80px;
+        border-right: 0;
+        -webkit-transform-origin: center right;
+        transform-origin: center right;
+    }
+    
+    .progress .progress-value {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    /*
+*
+* ==========================================
+* FOR DEMO PURPOSE
+* ==========================================
+*
+*/
+    
+    body {
+        min-height: 100vh;
+    }
+    
+    .rounded-lg {
+        border-radius: 1rem;
+    }
+    
+    .text-gray {
+        color: #aaa;
+    }
+    
+    div.h4 {
+        line-height: 1rem;
+    }
+</style>
+{% endblock css %} {% block body %}
+<!--Staff section -->
+
+<!--Room Stats section starts here-->
+
+
+
+<!--Room Stats section ends here-->
+
+
+<h2 class="text-center pb-2">Building Added</h2>
+
+<a href="/addbuilding" class="btn-group btn-primary" >Add New Building</a>
+
+<div class="container-fluid px-0 mx-aut">
+    {% if buildings %}
+       <table class="table">
+           <thead class="o">
+            <th>House Name</th>
+            <th>Location</th>
+            <th>Owner</th>
+            <th>Description</th>
+            <th>Capacity</th>
+            <th>Contact</th>
+            <th>Image</th>                    
+          
+            <th>price</th>
+            
+        </thead>
+        {% for r in buildings %}
+            <tr class="">
+            <td>{{ r.house_name }}</td>
+            <td>{{ r.p_id.districtname }}</td>
+            <td>{{ r.owner_id.username }}</td>
+            <td>{{ r.description }}</td>
+            <td>{{ r.capacity }}</td>
+            <td>{{ r.contact }}</td>
+            <td> <img src="{{r.picture.url}}" height="300px" width="200px" alt="">  </td>
+            <td>{{ r.rental }}</td>
+    
+            
+            
+           
+            </tr>
+        {% endfor %}
+        
+       </table> 
+       {% else %}
+       <p>No Building Available </p>
+    {% endif %}
+</div>
+
+
+<!---->
+
+<!--Modal for Add New Location starts from here-->
+
+<!-- The Modal -->
+
+
+<!--Modal for Add New location Ends here-->
+
+<!--Modal for Add New Room starts from here-->
+
+<!-- The Modal -->
+
+<!--Modal for Add New Room Ends here-->
+
+{% endblock body %} {% block js %}
+<!-- jquery for rooms stats  starts here-->
+
+<!--Jquery for room stats ends here-->
+{% endblock js %}

@@ -1,0 +1,99 @@
+<section class="my-5 ">
+    
+    <h2 class="text-center text-primary">Room Stats</h2>
+    <div class="container-fluid px-5 py-5 border">
+        <div class="row">
+
+
+
+            <div class="col-xl-3 col-lg-6 col-sm-12 mb-4 ">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">Total Rooms</h2>
+
+                    <!-- Progress bar 1 -->
+
+                    <div class="progress mx-auto" data-value={{ total_rooms|percentage:total_rooms}}>
+                        <span class="progress-left">
+                                    <span class="progress-bar border-primary"></span>
+                        </span>
+                        <span class="progress-right">
+                                    <span class="progress-bar border-primary"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">{{ total_rooms}}</div>
+                        </div>
+                    </div>
+                    <!-- END -->
+
+
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 col-sm-12 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">Available Rooms</h2>
+
+                    <!-- Progress bar 2 -->
+                    <div class="progress mx-auto" data-value={{ available|percentage:total_rooms}}>
+                        <span class="progress-left">
+                                    <span class="progress-bar border-success"></span>
+                        </span>
+                        <span class="progress-right">
+                                    <span class="progress-bar border-success"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">{{ available}}</div>
+                        </div>
+                    </div>
+                    <!-- END -->
+
+
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 col-sm-12 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">Not Available</h2>
+
+                    <!-- Progress bar 3 -->
+                    <div class="progress mx-auto" data-value={{ unavailable|percentage:total_rooms}}>
+                        <span class="progress-left">
+                                    <span class="progress-bar border-danger"></span>
+                        </span>
+                        <span class="progress-right">
+                                    <span class="progress-bar border-danger"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">{{ unavailable}}</div>
+                        </div>
+                    </div>
+                    <!-- END -->
+
+
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 col-sm-12 mb-4">
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">Total Reservation</h2>
+
+                    <!-- Progress bar 4 -->
+                    <div class="progress mx-auto" data-value={{reserved |percentage:total_rooms}}>
+                        <span class="progress-left">
+                                    <span class="progress-bar border-warning"></span>
+                        </span>
+                        <span class="progress-right">
+                                    <span class="progress-bar border-warning"></span>
+                        </span>
+                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div class="h2 font-weight-bold">{{reserved}}</div>
+                        </div>
+                    </div>
+                    <!-- END -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

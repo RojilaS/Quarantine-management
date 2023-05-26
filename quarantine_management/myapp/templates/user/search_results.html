@@ -1,0 +1,54 @@
+{% extends 'basic.html' %}
+{% block title %}Quarantine System
+{% endblock title %}
+{% block body %}
+ <!--Booking Section starts here-->
+
+<!--Booking Section ends here-->
+<!--Fetched reults appear here-->
+
+<div class="container-fluid px-0 mx-aut">
+    {% if buildings %}
+       <table class="table">
+           <thead class="o">
+            <th>House Name</th>
+            <th>Location</th>
+            <th>Owner</th>
+            <th>Description</th>
+            <th>Capacity</th>
+            <th>Contact</th>
+            <th>Image</th>                    
+          
+            <th>price</th>
+            <th>Action</th>
+        </thead>
+        {% for r in buildings %}
+            <tr class="">
+            <td>{{ r.house_name }}</td>
+            <td>{{ r.p_id.districtname }}</td>
+            <td>{{ r.owner_id.username }}</td>
+            <td>{{ r.description }}</td>
+            <td>{{ r.capacity }}</td>
+            <td>{{ r.contact }}</td>
+            <td> <img src="{{r.picture.url}}" height="300px" width="200px" alt="">  </td>
+            <td>{{ r.rental }}</td>
+            
+            <td><a href="/book/{{r.id}}"><button class="btn btn-warning">Book Now</button></a></td>
+            </tr>
+        {% endfor %}
+        
+       </table>
+       {% else %}
+       <p>No houses found</p> 
+    {% endif %}
+</div>
+<!--Fetched results ends here-->
+
+
+
+
+<!--Roo tables ends here-->
+
+
+{% endblock body %}
+

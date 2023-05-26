@@ -1,0 +1,43 @@
+{% extends 'basic.html' %} {% block title %}Dashboard {% endblock title %} {% block body %}
+
+{% for i in messages %}
+    <div class="alert alert-success" role="alert">
+        {{i}}
+      </div>
+    {% endfor %}
+<h3 class="text-center  text-success">REQUESTS</h3>
+
+<table class="table">
+    <thead>
+        <th>User</th>
+        <th>Building</th>
+        <th>Location</th>
+        <th>Members</th>
+        <th>Check in</th>
+        <th>Check out</th>
+        <th>Price</th>
+        <th>Status</th>
+       
+        <th>Action</th>
+    </thead>
+    {% for i in book %}
+    <tr>
+        <td>{{i.user_id}}</td>
+        <td>{{i.h_id.house_name}}</td>
+        <td>{{i.h_id.p_id.districtname}}</td>
+        <td>{{i.members}}</td>
+        <td>{{i.check_in}}</td>
+        <td>{{i.check_out}}</td>
+        <td>{{i.h_id.rental}}</td>
+        <td>{{i.status}}</td>
+        
+        <td>
+            <a  href="/view-doc/{{i.id}}" class="btn btn-danger">view Request</a>
+        </td>
+        
+    </tr>
+    {% endfor %}
+
+
+</table>
+{% endblock body %}

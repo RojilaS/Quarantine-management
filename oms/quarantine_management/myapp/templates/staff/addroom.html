@@ -1,0 +1,189 @@
+{% extends 'basic.html' %}
+{% block title %}Add Room
+{% endblock title %}
+{% block css %}
+ <style>
+        .progress {
+            width: 150px;
+            height: 150px;
+            background: none;
+            position: relative;
+        }
+        
+        .progress::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 6px solid #eee;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .progress>span {
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .progress .progress-left {
+            left: 0;
+        }
+        
+        .progress .progress-bar {
+            width: 100%;
+            height: 100%;
+            background: none;
+            border-width: 6px;
+            border-style: solid;
+            position: absolute;
+            top: 0;
+        }
+        
+        .progress .progress-left .progress-bar {
+            left: 100%;
+            border-top-right-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border-left: 0;
+            -webkit-transform-origin: center left;
+            transform-origin: center left;
+        }
+        
+        .progress .progress-right {
+            right: 0;
+        }
+        
+        .progress .progress-right .progress-bar {
+            left: -100%;
+            border-top-left-radius: 80px;
+            border-bottom-left-radius: 80px;
+            border-right: 0;
+            -webkit-transform-origin: center right;
+            transform-origin: center right;
+        }
+        
+        .progress .progress-value {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        
+        body {
+            min-height: 100vh;
+        }
+        
+        .rounded-lg {
+            border-radius: 1rem;
+        }
+        
+        .text-gray {
+            color: #aaa;
+        }
+        
+        div.h4 {
+            line-height: 1rem;
+        }
+    </style>
+{% endblock css %}
+{% block body %}
+ <h1 class="text-center bg-warning my-0">Add Building</h1>
+
+
+    <!--Staff section -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-xlg-6 col-sm-12 mx-auto">
+
+                <form action="" method="POST" id="formvalidation" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="pwd">House Id:</label>
+                        <input type="number" class="form-control " id="capacity" name="hid" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Place:</label>
+                        <select class="form-control" name="place" id="roomtype" required>
+                            {% for j in place %}
+                            <option value="{{j.id}}">{{j.districtname}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">House Name:</label>
+                        <input type="text" class="form-control " id="capacity" name="housename" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Description:</label>
+                        <input type="text" class="form-control " id="capacity" name="description" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Capacity:</label>
+                        <input type="number" class="form-control " id="capacity" name="capacity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Image:</label>
+                        <input type="file" class="form-control " id="capacity" name="image" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">contact:</label>
+                        <input type="mumber" class="form-control " id="price" name="contact" pattern="[0-9]{}" minlength="10" maxlength="10" id="numberInput" onblur="validateNumber()" onkeypress="return isNumberKey(event,this)"  required="required" >
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Rental:</label>
+                        <input type="number" class="form-control "  id="size" name="rental" required>
+                    </div>
+                 
+                    <div class="form-group">
+                   
+                    <button type="submit" class="btn btn-primary">Add Room</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function validateNumber() {
+      var numberInput = document.getElementById("numberInput");
+      var value = numberInput.value;
+
+      if (value === "0000000000" || value === "1111111111" || value === "2222222222" || value === "3333333333" || value === "4444444444" || value === "5555555555" || value === "6666666666" || value === "7777777777" || value ==="8888888888" || value ==="9999999999")
+      {
+        alert("Please enter a valid phone number");
+        numberInput.value = "";
+        return false;
+      }
+    }
+    </script>
+    
+    <script language="Javascript" type="text/javascript">
+    
+        function isNumberKey(evt, obj) {
+
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            var value = obj.value;
+            var dotcontains = value.indexOf(".") != -1;
+            if (dotcontains)
+                if (charCode == 46) return false;
+            if (charCode == 46) return true;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+</script>
+
+{% endblock body %}
+   
+
+
+
+
+
+
